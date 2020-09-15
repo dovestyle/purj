@@ -27,10 +27,48 @@ import {
 * Standard Array extended with apply() function. Acts the same as map(), but
   current element is `this` and callback is passed the iteration index.
 
+  ```js
+  var list = ['one', 'two', 'three', 'four', 'five'];
+  list.apply(function(i) {
+    console.log(i + '. ' + this);
+  });
+
+  ```
+
+  outputs:
+
+  ```
+  0. one
+  1. two
+  2. three
+  3. four
+  4. five
+  ```
+
 * Standard NodeList extended with the same apply() function as Array.
+
+  ```js
+  var list = document.querySelectorAll('a');
+  list.apply(function(i) {
+    console.log(i + '. ' + this.href);
+  });
+  ```
+
+  might output something like:
+
+  ```
+  0. /
+  1. /about
+  2. /another-link
+  ```
 
 * Standard Element extended with findParent function. Pass it a selector
   to find the first parent element that matches it.
+
+  ```js
+  var el = document.querySelector('a.brand');
+  var p  = el.findParent('nav');
+  ```
 
 * New Listener module for applying events. Uses full DOM listener for
   dynamic elements added after listener (like jQuery's `document.on()`).

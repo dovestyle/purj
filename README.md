@@ -2,6 +2,26 @@
 
 Purge and Purify JS: This library extends standard JavaScript classes and adds some helper functionality - all in pure, simple, lightweight JavaScript.
 
+## Installation
+
+Use npm or yarn to add the library to your project:
+```js
+npm i purj --save-dev
+
+// or
+
+yarn add purj --dev
+```
+
+Then include it wherever you need it:
+```js
+import {
+  collections,
+  elements,
+  listener
+} from purj;
+```
+
 ## Features
 
 * Standard Array extended with apply() function. Acts the same as map(), but

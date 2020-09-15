@@ -2,6 +2,10 @@
 
 Purge and Purify JS: This library extends standard JavaScript classes and adds some helper functionality - all in pure, simple, lightweight JavaScript.
 
+jQuery is close to 90kb minified, and even the slim version is still around 72kb. This library means to provide a way to start migrating away from jQuery, and using pure JavaScript to achieve most of the same goals.
+
+Pure JavaScript ftw! 
+
 ## Installation
 
 Use npm or yarn to add the library to your project:

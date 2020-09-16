@@ -4,6 +4,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <title>purj test</title>
+  <style type="text/css">
+  html, body {
+    height: 100%;
+  }
+  body {
+    background-color: #101112;
+    color: #e0e1e2;
+  }
+  </style>
 </head>
 <body>
 
@@ -19,6 +28,7 @@ purj.listener.ready(function(e) {
 });
 
 purj.listener.click('body', function(e) {
+  console.log('-----');
   console.log('event',  e);
   console.log('this',   this);
   console.log('parent', this.findParent('html'));

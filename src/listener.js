@@ -65,7 +65,7 @@ export default (function(self) {
                 }
             }
         });
-    } else {
-        return self;
     }
+
+    return self;
 })({});

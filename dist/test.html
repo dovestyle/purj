@@ -9,12 +9,23 @@
 
 <h1>purj test</h1>
 <p>testing page for purj.</p>
+<p>this is another paragraph.</p>
 
 <script src="./purj.min.js"></script>
 <script>
 
+purj.listener.ready(function(e) {
+  console.log('ready', e);
+});
+
 purj.listener.click('body', function(e) {
-  console.log(this, e);
+  console.log('event',  e);
+  console.log('this',   this);
+  console.log('parent', this.findParent('html'));
+
+  document.querySelectorAll('p').apply(function(i) {
+    console.log('query', i, this);
+  });
 });
 
 </script>

@@ -1,20 +1,33 @@
 # purj
 
-Purge and Purify JS: This library extends standard JavaScript classes and adds some helper functionality - all in pure, simple, lightweight JavaScript.
+Purge and Purify JS: This library extends standard JavaScript classes and adds some helper functionality - all in pure, modern, lightweight JavaScript.
 
-jQuery is close to 90kb minified, and even the slim version is still around 72kb. This library aims to provide a way to start migrating away from jQuery, and using pure JavaScript to achieve some of the same goals. Well, the most-used pieces.
+This library aims to provide an alternative to bulky jQuery. jQuery is close to 90kb minified, and even the slim version is still around 72kb. Gzipped or not, that's a lot of blocking in a time where blocking time is precious (ahem, Lighthouse).
 
-Pure JavaScript ftw!
+purj encourages pure JavaScript as much as it can, providing only minimal helpers to achieve some of the commonly-used logic from jQuery. It will not meet all of them. There is no global function for selecting and iterating through elements. There are no helper functions for manipulating CSS or adding/removing classes. No AJAX. No animations. In my opinion, that is all fluff that can be achieved with intrinsic JavaScript (or CSS for animations) and a little more typing. These days, your code compiler/minifier should compress and consolidate that stuff for you anyway.
+
+purj is only a few days old as of this writing. I wrote what's currently here to meet a requirement of my day job - trying to remove as much superfluous JavaScript as possible.
 
 ## Installation
 
-Use npm or yarn to add the library to your project:
+You've got a couple options...
+
+### External Script
+
+You can source the dist script directly in your page:
+```html
+<script src="purj.min.js"></script>
+```
+
+### Yarn/NPM
+
+Or, use yarn or npm to add the library to your project:
 ```js
-npm i purj --save-dev
+yarn add purj --dev
 
 // or
 
-yarn add purj --dev
+npm i purj --save-dev
 ```
 
 Then include it wherever you need it:
@@ -27,6 +40,8 @@ import {
 ```
 
 ## Features
+
+As purj is still very young, there are only a few features right now...
 
 * Standard Array extended with apply() function. Acts the same as map(), but
   current element is `this` and callback is passed the iteration index.

@@ -27,6 +27,10 @@ purj.listener.ready(function(e) {
   console.log('ready', e);
 });
 
+purj.listener.click(document.querySelector('p'), function(e) {
+  console.log('p', e);
+});
+
 purj.listener.click('body', function(e) {
   console.log('-----');
   console.log('event',  e);

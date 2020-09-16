@@ -33,6 +33,10 @@ export default (function(self) {
     };
 
     self.add = function(event, selector, callback) {
+        if (selector instanceof Element) {
+            return selector.addEventListener(event, callback);
+        }
+
         if (!(event in self.events)) {
             document.addEventListener(event, function(ev) {
                 self.handle(event, ev);

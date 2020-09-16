@@ -59,9 +59,7 @@ export default (function(self) {
                 }
 
                 return function(selector, callback) {
-                    if (args.length > 1) {
-                        self.add(p, selector, callback);
-                    }
+                    self.add(p, selector, callback);
                 }
             }
         });

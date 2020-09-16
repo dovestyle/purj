@@ -58,9 +58,9 @@ export default (function(self) {
                     return target[p];
                 }
 
-                return function(...args) {
+                return function(selector, callback) {
                     if (args.length > 1) {
-                        self.add(p, args[0], args[1]);
+                        self.add(p, selector, callback);
                     }
                 }
             }

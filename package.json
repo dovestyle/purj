@@ -1,9 +1,10 @@
 {
   "name": "purj",
   "description": "Purge and Purify JS: This library extends standard JavaScript classes and adds some helper functionality, all in pure, simple, lightweight JavaScript.",
-  "version": "0.0.1",
+  "author": "Nicholas Dove <nick@dovestyles.com>",
+  "type": "module",
+  "license": "MIT",
   "main": "index.js",
   "repository": "https://github.com/dovestyle/purj",
-  "author": "Nicholas Dove <nick@dovestyles.com>",
-  "license": "MIT"
+  "version": "0.0.1"
 }

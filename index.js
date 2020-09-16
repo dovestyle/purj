@@ -1,3 +1,9 @@
-module.exports.collections = require('./src/collections');
-module.exports.elements    = require('./src/elements');
-module.exports.listener    = require('./src/listener');
+import collections from './src/collections';
+import elements from './src/elements';
+import listener from './src/listener';
+
+export {
+    collections,
+    elements,
+    listener,
+}

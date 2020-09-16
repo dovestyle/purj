@@ -22,7 +22,7 @@ NodeList.prototype.apply = function(callback) {
     return output;
 };
 
-module.exports.collections = (function(self) {
+export default (function(self) {
     "use strict";
 
     return self;

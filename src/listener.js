@@ -1,4 +1,4 @@
-module.exports.listener = (function(self) {
+export default (function(self) {
     "use strict";
 
     self.events    = {};

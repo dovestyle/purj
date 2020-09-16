@@ -12,7 +12,7 @@ Element.prototype.findParent = function(selector) {
     return false;
 };
 
-exports.elements = (function(self) {
+export default (function(self) {
     "use strict";
 
     return self;

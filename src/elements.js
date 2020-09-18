@@ -1,8 +1,18 @@
-Element.prototype.findParent = function(selector) {
+const dp = Document.prototype;
+const ep = Element.prototype;
+
+dp.find  = ep.find  = function(selector) { return this.querySelectorAll(selector); };
+dp.pluck = ep.pluck = function(selector) { return this.querySelector(selector); };
+
+ep.on = function(event, callback, options) {
+    this.addEventListener(event, callback, options);
+};
+
+ep.findParent = function(selector) {
     var parent = this.parentElement;
 
     while (parent !== null) {
-        if (parent.matches(selector)) {
+        if ('matches' in parent && parent.matches(selector)) {
             return parent;
         }
 
@@ -12,7 +22,7 @@ Element.prototype.findParent = function(selector) {
     return false;
 };
 
-Element.prototype.getData = function(name) {
+ep.getData = function(name) {
     var i, attr, data = {};
 
     for (i = 0; i < this.attributes.length; i++) {
@@ -32,7 +42,7 @@ Element.prototype.getData = function(name) {
     }
 };
 
-Element.prototype.setData = function(data, val) {
+ep.setData = function(data, val) {
     if (typeof data == 'object') {
         for (var key in data) {
             this.setData(key, data[key]);

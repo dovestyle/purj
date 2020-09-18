@@ -1,4 +1,7 @@
-Array.prototype.apply = function(callback) {
+const ap  = Array.prototype;
+const nlp = NodeList.prototype;
+
+ap.apply = function(callback) {
     var i, output = [];
 
     for (var i in this) {
@@ -9,7 +12,7 @@ Array.prototype.apply = function(callback) {
     return output;
 };
 
-NodeList.prototype.apply = function(callback) {
+nlp.apply = function(callback) {
     var i, output = [];
 
     for (i in this) {
@@ -21,6 +24,21 @@ NodeList.prototype.apply = function(callback) {
 
     return output;
 };
+
+nlp.setData = function(name, value) {
+    for (var i = 0; i < this.length; i++) {
+        this.setData(name, value);
+    }
+};
+
+nlp.on = function(event, callback, options) {
+    for (var i = 0; i < this.length; i++) {
+        this[i].on(event, callback, options);
+    }
+};
+
+ap.first = nlp.first = function() { return this[0]; };
+ap.last  = nlp.last  = function() { return this[this.length-1]; }
 
 export default (function(self) {
     "use strict";

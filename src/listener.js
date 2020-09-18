@@ -4,12 +4,41 @@ export default (function(self) {
     self.events    = {};
     self.listeners = {};
 
-    self.ready = function(callback) {
+    self.ready = function(callback, options) {
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             callback.call(document);
         } else {
             document.addEventListener('DOMContentLoaded', callback, {
                 once: true,
+            });
+        }
+    };
+
+    self.on = function(event, selector, callback) {
+        if (selector instanceof Element || selector instanceof NodeList) {
+            selector.on(event, callback);
+
+        } else if (selector instanceof Array) {
+            for (var i = 0; i < selector.length; i++) {
+                self.on(event, selector[i], callback);
+            }
+
+        } else {
+            if (!(event in self.events)) {
+                document.addEventListener(event, function(ev) {
+                    self.handle(event, ev);
+                });
+
+                self.events[event] = true;
+            }
+
+            if (!(event in self.listeners)) {
+                self.listeners[event] = [];
+            }
+
+            self.listeners[event].push({
+                callback: callback,
+                selector: selector,
             });
         }
     };
@@ -20,7 +49,11 @@ export default (function(self) {
             listener = self.listeners[event][i];
 
             for (n in event_obj.path) {
-                if ('matches' in event_obj.path[n] && event_obj.path[n].matches(listener.selector)) {
+                if (
+                    listener.callback &&
+                    'matches' in event_obj.path[n] &&
+                    event_obj.path[n].matches(listener.selector)
+                ) {
                     listener.callback.call(event_obj.path[n], event_obj);
                     break;
                 }
@@ -32,38 +65,15 @@ export default (function(self) {
         }
     };
 
-    self.add = function(event, selector, callback) {
-        if (selector instanceof Element) {
-            return selector.addEventListener(event, callback);
-        }
-
-        if (!(event in self.events)) {
-            document.addEventListener(event, function(ev) {
-                self.handle(event, ev);
-            });
-
-            self.events[event] = true;
-        }
-
-        if (!(event in self.listeners)) {
-            self.listeners[event] = [];
-        }
-
-        self.listeners[event].push({
-            callback: callback,
-            selector: selector,
-        });
-    };
-
     if (typeof Proxy !== 'undefined') {
         return new Proxy(self, {
-            get(target, p) {
+            get: function(target, p) {
                 if (p in target) {
                     return target[p];
                 }
 
                 return function(selector, callback) {
-                    self.add(p, selector, callback);
+                    self.on(p, selector, callback);
                 }
             }
         });

@@ -12,24 +12,38 @@
     background-color: #101112;
     color: #e0e1e2;
   }
+  div {
+    text-align: center;
+  }
   </style>
 </head>
 <body>
 
-<h1>purj test</h1>
-<p data-test="true">testing page for purj.</p>
-<p data-test="true" data-foo="bar">this is another paragraph.</p>
+<div>
+  <h1>purj test</h1>
+  <p data-test="true">testing page for purj.</p>
+  <p data-test="true" data-foo="bar">this is another paragraph.</p>
+</div>
 
-<script src="./purj.min.js"></script>
+<script src="./purj.js"></script>
 <script>
 
 purj.listener.ready(function(e) {
-  document.querySelectorAll('p').apply(function(i) {
+  document.find('p').apply(function(i) {
     console.log('ready', 'query', i, this, this.getData());
   });
 });
 
-purj.listener.click(document.querySelector('p'), function(e) {
+document.find('p').on('click', function(e) {
+});
+
+document.find('p').apply(function() {
+  this.on('click', function(e) {
+    console.log('click', e);
+  });
+});
+
+purj.listener.click(document.find('p'), function(e) {
   console.log('p', e);
 });
 

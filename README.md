@@ -68,7 +68,7 @@ As purj is still very young, there are only a few features right now...
 `NodeList.apply(callback)` - Run callback on every element in list. Same details as `Array.apply`.
 * `NodeList.first()` - Retrieve first element from list.
 * `NodeList.last()` - Retrieve last element from list.
-* `NodeList.on(event, callback, options)` - Shortcut for adding an event listener to each element in list.
+* `NodeList.on(event, callback)` - Shortcut for adding an event listener to each element in list.
   ```js
   document.find('a').on('click', function(e) {
     console.log(this, e);

@@ -57,23 +57,27 @@ As purj is still very young, there are only a few features right now...
   ```
 * `Array.first()` - Retrieve first item from array.
 * `Array.last()` - Retrieve last item from array.
+
 * `document.find(selector)` - Shortcut for document.querySelectorAll(). Find all elements in document matching selector.
 * `document.pluck(selector)` - Shortcut for document.querySelector(). Find first element in document matching selector.
+
 * `Element.find(selector)` - Find all children matching element.
 * `Element.pluck(selector)` - Find first child matching selector.
 * `Element.findParent(selector)` - Find first parent element matching selector.
 * `Element.getData(?name)` - Get attribute data-name from element. If name is omitted, return hash of all data attributes on element.
 * `Element.setData(data, ?val)` - Set data data-data attribute on element. If data is an object, val is ignored and every key in data is added as a data atribute to element.
-* `Element.on(event, callback, selector)` - Shortcut for element.addEventListener().
-`NodeList.apply(callback)` - Run callback on every element in list. Same details as `Array.apply`.
+* `Element.on(event, callback, ?options)` - Shortcut for element.addEventListener().
+
+* `NodeList.apply(callback)` - Run callback on every element in list. Same details as `Array.apply`.
 * `NodeList.first()` - Retrieve first element from list.
 * `NodeList.last()` - Retrieve last element from list.
-* `NodeList.on(event, callback)` - Shortcut for adding an event listener to each element in list.
+* `NodeList.on(event, callback, ?options)` - Shortcut for adding an event listener to each element in list.
   ```js
   document.find('a').on('click', function(e) {
     console.log(this, e);
   });
   ```
+
 * `listener.on(event, selector, callback)` - Adds event listener to the DOM for dynamic elements. Mimics jQuery's `$(document).on()` in this way.
   For example:
   ```js

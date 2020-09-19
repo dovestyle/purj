@@ -1,5 +1,5 @@
-const ap  = Array.prototype;
-const nlp = NodeList.prototype;
+var ap  = Array.prototype;
+var nlp = NodeList.prototype;
 
 ap.apply = function(callback) {
     var i, output = [];

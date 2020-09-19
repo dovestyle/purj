@@ -1,8 +1,10 @@
-const dp = Document.prototype;
-const ep = Element.prototype;
+var dp = Document.prototype;
+var ep = Element.prototype;
 
-dp.find  = ep.find  = function(selector) { return this.querySelectorAll(selector); };
-dp.pluck = ep.pluck = function(selector) { return this.querySelector(selector); };
+dp.find  = dp.querySelectorAll;
+dp.pluck = dp.querySelector;
+ep.find  = ep.querySelectorAll;
+ep.pluck = dp.querySelector;
 
 ep.on = function(event, callback, options) {
     this.addEventListener(event, callback, options);
@@ -23,16 +25,25 @@ ep.findParent = function(selector) {
 };
 
 ep.getData = function(name) {
+    if (this.dataset) {
+        if (name) {
+            return this.dataset[name];
+        }
+        return this.dataset;
+    }
+
     var i, attr, data = {};
 
     for (i = 0; i < this.attributes.length; i++) {
         attr = this.attributes[i].name;
         if (attr.startsWith('data-')) {
-            var key = attr.split('-', 2)[1];
-            if (name) {
-                if (name == key) { return this.attributes[i].value; }
-            } else {
-                data[key] = this.attributes[i].value;
+            var key  = attr.replace(/^data-/, '');
+            var key2 = attr.camelize();
+
+            if (name && (name == key || name == key2)) {
+                return this.attributes[i].value;
+            } else if (!name) {
+                data[key2] = this.attributes[i].value;
             }
         }
     }
@@ -42,13 +53,28 @@ ep.getData = function(name) {
     }
 };
 
-ep.setData = function(data, val) {
+ep.setData = function(data, val, prefix) {
+    if (prefix && prefix != '') {
+        prefix = prefix + '-';
+    } else {
+        prefix = '';
+    }
+
     if (typeof data == 'object') {
         for (var key in data) {
             this.setData(key, data[key]);
         }
+    } else if (typeof val == 'object') {
+        for (var key in val) {
+            this.setData(key, val[key], prefix + data);
+        }
     } else {
-        this.setAttribute('data-' + data, val);
+        if (this.dataset) {
+            var name = (prefix + data).camelize();
+            this.dataset[name] = val;
+        } else {
+            this.setAttribute('data-' + prefix + data, val);
+        }
     }
 };
 

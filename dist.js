@@ -1,11 +1,8 @@
-import {
-    collections,
-    elements,
-    listener,
-} from './index';
+import types       from './src/types';
+import collections from './src/collections';
+import elements    from './src/elements';
+import listener    from './src/listener';
 
 window.purj = {
-    collections: collections,
-    elements:    elements,
-    listener:    listener,
+    listener: listener,
 };

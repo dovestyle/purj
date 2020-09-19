@@ -35,6 +35,7 @@ npm i purj --save-dev
 Then include it wherever you need it:
 ```js
 import {
+  types,
   collections,
   elements,
   listener
@@ -77,6 +78,8 @@ As purj is still very young, there are only a few features right now...
     console.log(this, e);
   });
   ```
+
+* `String.camelize()` - Convert `this-dashed-string` to `thisDashedString`.
 
 * `listener.on(event, selector, callback)` - Adds event listener to the DOM for dynamic elements. Mimics jQuery's `$(document).on()` in this way.
   For example:

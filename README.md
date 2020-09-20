@@ -34,12 +34,7 @@ npm i purj --save-dev
 
 Then include it wherever you need it:
 ```js
-import {
-  types,
-  collections,
-  elements,
-  listener
-} from 'purj';
+import purj from 'purj';
 ```
 
 ## Features
@@ -59,14 +54,23 @@ As purj is still very young, there are only a few features right now...
 * `Array.first()` - Retrieve first item from array.
 * `Array.last()` - Retrieve last item from array.
 
-* `document.find(selector)` - Shortcut for document.querySelectorAll(). Find all elements in document matching selector.
-* `document.pluck(selector)` - Shortcut for document.querySelector(). Find first element in document matching selector.
+* `Document.find(selector)` - Shortcut for document.querySelectorAll(). Find all elements in document matching selector.
+* `Document.pluck(selector)` - Shortcut for document.querySelector(). Find first element in document matching selector.
+* `Document.on(event, selector, callback)` - Add event listener to DOM for dynamic elements. Mimics jQuery's `$(document).on()` in this way.
+  For example:
+  ```js
+  document.on('click', 'a.logo', function(e) {
+    e.preventDefault();
+    this.classList.add('clicked');
+  });
+  ```
+* `Document.ready(callback)` - Fire callback when document is loaded & ready.
 
 * `Element.find(selector)` - Find all children matching element.
 * `Element.pluck(selector)` - Find first child matching selector.
 * `Element.findParent(selector)` - Find first parent element matching selector.
 * `Element.getData(?name)` - Get attribute data-name from element. If name is omitted, return hash of all data attributes on element.
-* `Element.setData(data, ?val)` - Set data data-data attribute on element. If data is an object, val is ignored and every key in data is added as a data atribute to element.
+* `Element.setData(data, ?val)` - Set data data-data attribute on element. If data is an object, val is ignored and every key in data is added as a data attribute to element. Deeply nested objects will work too.
 * `Element.on(event, callback, ?options)` - Shortcut for element.addEventListener().
 
 * `NodeList.apply(callback)` - Run callback on every element in list. Same details as `Array.apply`.
@@ -79,22 +83,6 @@ As purj is still very young, there are only a few features right now...
   });
   ```
 
-* `String.camelize()` - Convert `this-dashed-string` to `thisDashedString`.
+* `Object.apply(callback)` - Run callback on every item in object. The callback is passed the key, and `this` is the item.
 
-* `listener.on(event, selector, callback)` - Adds event listener to the DOM for dynamic elements. Mimics jQuery's `$(document).on()` in this way.
-  For example:
-  ```js
-  listener.click('a.logo', function(e) {
-    e.preventDefault();
-    this.classList.add('clicked');
-  });
-  ```
-  If you need to support IE, you cannot use the event name as a function.
-  Instead, use the on() function, which is what gets called anyway:
-  ```js
-  listener.on('click', 'a.logo', function(e) {
-      e.preventDefault();
-      this.classList.add('clicked');
-  });
-  ```
-  These 2 blocks behave exactly the same.
+* `String.camelize()` - Convert `this-dashed-string` to `thisDashedString`.

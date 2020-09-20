@@ -1,8 +1,10 @@
-import types       from './src/types';
-import collections from './src/collections';
-import elements    from './src/elements';
-import listener    from './src/listener';
+import './src/array';
+import './src/document';
+import './src/element';
+import './src/nodelist';
+import './src/object';
+import './src/string';
 
-export {
-    listener
-}
+export default {
+    version: '0.0.2',
+};

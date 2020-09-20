@@ -1,14 +1,8 @@
-var dp = Document.prototype;
 var ep = Element.prototype;
 
-dp.find  = dp.querySelectorAll;
-dp.pluck = dp.querySelector;
 ep.find  = ep.querySelectorAll;
-ep.pluck = dp.querySelector;
-
-ep.on = function(event, callback, options) {
-    this.addEventListener(event, callback, options);
-};
+ep.pluck = ep.querySelector;
+ep.on    = ep.addEventListener;
 
 ep.findParent = function(selector) {
     var parent = this.parentElement;
@@ -35,7 +29,7 @@ ep.getData = function(name) {
     var i, attr, data = {};
 
     for (i = 0; i < this.attributes.length; i++) {
-        attr = this.attributes[i].name;
+        attr = this.attributes[i].name.toLowerCase();
         if (attr.startsWith('data-')) {
             var key  = attr.replace(/^data-/, '');
             var key2 = attr.camelize();
@@ -62,11 +56,15 @@ ep.setData = function(data, val, prefix) {
 
     if (typeof data == 'object') {
         for (var key in data) {
-            this.setData(key, data[key]);
+            if (typeof data[key] != 'function') {
+                this.setData(key, data[key]);
+            }
         }
     } else if (typeof val == 'object') {
         for (var key in val) {
-            this.setData(key, val[key], prefix + data);
+            if (typeof val[key] != 'function') {
+                this.setData(key, val[key], prefix + data);
+            }
         }
     } else {
         if (this.dataset) {
@@ -77,9 +75,3 @@ ep.setData = function(data, val, prefix) {
         }
     }
 };
-
-export default (function(self) {
-    "use strict";
-
-    return self;
-})({});

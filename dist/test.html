@@ -28,26 +28,35 @@
 <script src="./purj.js"></script>
 <script>
 
-purj.listener.ready(function(e) {
+document.ready(function(e) {
   document.find('p').apply(function(i) {
-    console.log('ready', 'query', i, this, this.getData());
+    //console.log('ready', 'query', i, this, this.getData());
+    //console.log(document.pluck('p').dataset);
+    document.pluck('p').setData({
+      key1: true,
+      key2: {
+        key3: false,
+        key4: {
+          key5: true,
+          key6: false,
+        }
+      },
+      key7: true,
+      key8: {
+        key9: 14,
+        key10: {
+          key11: 'fuck',
+        }
+      },
+    });
   });
 });
 
-document.find('p').on('click', function(e) {
-});
-
-document.find('p').apply(function() {
-  this.on('click', function(e) {
-    console.log('click', e);
-  });
-});
-
-purj.listener.click(document.find('p'), function(e) {
+document.on('click', 'p[data-key2-key3]', function(e) {
   console.log('p', e);
 });
 
-purj.listener.click('body', function(e) {
+document.on('click', 'body', function(e) {
   console.log('-----');
   console.log('event',  e);
   console.log('this',   this);

@@ -1,8 +1,3 @@
-import types       from './src/types';
-import collections from './src/collections';
-import elements    from './src/elements';
-import listener    from './src/listener';
+import purj from './index';
 
-window.purj = {
-    listener: listener,
-};
+window.purj = purj;

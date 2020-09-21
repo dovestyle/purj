@@ -9,6 +9,4 @@ const purj = {
     version: '0.0.2',
 };
 
-window.purj = purj;
-
 export default purj;

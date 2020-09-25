@@ -1,0 +1,82 @@
+@keyframes bulmaFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.button {
+  transition: background-color 0.3s;
+}
+
+.dropdown {
+  .dropdown-menu {
+    animation: bulmaFadeIn 0.3s;
+  }
+
+  .dropdown-item {
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+
+.message, .notification {
+  opacity: 1;
+
+  &.fading-out {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+}
+
+.modal {
+  .modal-background, .modal-content {
+    animation: bulmaFadeIn 0.3s;
+    opacity: 1;
+  }
+
+  &.fading-out {
+    .modal-background, .modal-content {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  }
+}
+
+.navbar {
+  a.navbar-item {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .navbar-item.has-dropdown .navbar-dropdown {
+    animation: bulmaFadeIn 0.3s;
+  }
+}
+
+.tabbed-content {
+  .tabs {
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    li a {
+      transition: background-color 0.3s,
+                  border-bottom-color 0.3s,
+                  color 0.3s;
+    }
+  }
+
+  .tabs-content {
+    .tab-content {
+      animation: bulmaFadeIn 0.15s;
+      display: none;
+      opacity: 1;
+
+      &.is-active {
+        display: block;
+      }
+
+      &.fading-out {
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+    }
+  }
+}

@@ -4,24 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <title>bulma test</title>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.css">
-  <style>
-html, body {
-  height: 100%;
-}
-
-.tabs-content .tabs:not(:last-child) {
-  margin-bottom: 0;
-}
-
-.tabs-content .tab-content {
-    display: none;
-}
-
-.tabs-content .tab-content.is-active {
-  display: initial;
-}
-  </style>
+  <link href="./bulma.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -88,6 +71,12 @@ html, body {
   </nav>
 </header>
 
+<div class="content section">
+  <h1>bulma test</h1>
+  <p data-test="true">testing page for bulma.</p>
+  <p data-test="true" data-foo="bar">this is another paragraph. <a href="#open-modal">open modal</a>.</p>
+</div>
+
 <div class="section">
   <div class="tabs-content">
     <div class="tabs">
@@ -108,39 +97,69 @@ html, body {
   </div>
 </div>
 
-<div class="content">
-  <h1>bulma test</h1>
-  <p data-test="true">testing page for bulma.</p>
-  <p data-test="true" data-foo="bar">this is another paragraph.</p>
+<div class="section">
+  <div class="dropdown">
+    <div class="dropdown-trigger">
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Dropdown button</span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <a href="#" class="dropdown-item">
+          Dropdown item
+        </a>
+        <a class="dropdown-item">
+          Other dropdown item
+        </a>
+        <a href="#" class="dropdown-item is-active">
+          Active dropdown item
+        </a>
+        <a href="#" class="dropdown-item">
+          Other dropdown item
+        </a>
+        <hr class="dropdown-divider">
+        <a href="#" class="dropdown-item">
+          With a divider
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section content">
+  <h2>wokka wokka</h2>
+  <div class="message">
+    <div class="message-header">
+      <p>Title</p>
+      <button class="delete" aria-label="Delete"></button>
+    </div>
+    <div class="message-body">
+      <p>This is the body</p>
+    </div>
+  </div>
+  <div class="notification">
+    <button class="delete"></button>
+    <p>Some text</p>
+    <p>This is the body</p>
+  </div>
 </div>
 
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <div class="content">
+    <!-- Any other Bulma elements you want -->
+    <div class="content has-background-light">
       <h1>WOKKA WOKKA</h1>
     </div>
-    <!-- Any other Bulma elements you want -->
   </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
 
 <script src="./bulma.js"></script>
-<script>
-
-document.ready(function() {
-  document.find('.navbar-burger').apply(function() {
-    this.navbar();
-  });
-
-  document.pluck('.modal').modal({open: true});
-
-  document.find('.tabs-content').apply(function() {
-    this.tabs();
-  });
-});
-
-</script>
 
 </body>
 </html>

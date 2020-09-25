@@ -57,7 +57,7 @@
                 this.purj.listeners[event] = [];
             }
 
-            this.purj.listeners[event].push({
+            this.purj.listeners[event].unshift({
                 callback: callback,
                 selector: selector,
             });

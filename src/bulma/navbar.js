@@ -1,5 +1,3 @@
-import purj from '../../index';
-
 (function() {
 
     this.navbar = function() {
@@ -19,5 +17,3 @@ import purj from '../../index';
     };
 
 }).call(Element.prototype);
-
-export default purj;

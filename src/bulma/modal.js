@@ -1,5 +1,3 @@
-import purj from '../../index';
-
 (function() {
 
     this.modal = function(options) {
@@ -9,24 +7,59 @@ import purj from '../../index';
             element: this,
 
             options: Object.assign({
-                noscroll: true,
-                open:    false,
+                closeOnClick: false,
+                closeOnEsc:   true,
+                fadeoutClass: false,
+                fadeoutTime:  false,
+                noscroll:     true,
             }, options || {}),
+
+            _fading:   false,
+            _noscroll: false,
 
             open: function() {
                 if (this.options.noscroll) {
-                    document.pluck('html').classList.add('is-clipped');
+                    var html = document.pluck('html').classList;
+                    if (html.contains('is-clipped')) {
+                        this._noscroll = true;
+                    } else {
+                        html.add('is-clipped');
+                    }
                 }
 
                 this.element.classList.add('is-active');
+
+                if (this.options.closeOnEsc) {
+                    var modal = this;
+                    document.on('keyup', 'body', function(e) {
+                        if (e.key == 'Escape') {
+                            e.stopPropagation();
+                            modal.close();
+                        }
+                    }, {
+                        once: true,
+                    });
+                }
             },
 
             close: function() {
-                if (this.options.noscroll) {
-                    document.pluck('html').classList.remove('is-clipped');
-                }
+                if (this.options.fadeoutClass !== false &&
+                    this.options.fadeoutTime !== false &&
+                    this._fading === false
+                ) {
+                    this._fading = true;
+                    this.element.classList.add(this.options.fadeoutClass);
+                    setTimeout((function() {
+                        this.close();
+                    }).bind(this), this.options.fadeoutTime * 1000);
+                } else {
+                    if (this.options.noscroll && !this._noscroll) {
+                        document.pluck('html').classList.remove('is-clipped');
+                    }
 
-                this.element.classList.remove('is-active');
+                    this.element.classList.remove('is-active', this.options.fadeoutClass);
+                    this._fading = false;
+                }
             },
         };
 
@@ -35,8 +68,10 @@ import purj from '../../index';
             modal.close();
         });
 
-        if (modal.options.open) {
-            modal.open();
+        if (modal.options.closeOnClick) {
+            this.pluck('.modal-background').on('click', function() {
+                modal.close();
+            });
         }
 
         this._modal = modal;
@@ -44,5 +79,3 @@ import purj from '../../index';
     };
 
 }).call(Element.prototype);
-
-export default purj;

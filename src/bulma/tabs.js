@@ -4,9 +4,9 @@
         if (this._tabs) { return this._tabs; }
 
         var tabs = {
-            activeContent: this.pluck('.tab-content.is-active'),
+            activeContent: this.pluck('.tabs-content .tab-content.is-active'),
             activeTab:     this.pluck('.tabs li.is-active'),
-            contents:      this.find('.tab-content'),
+            contents:      this.find('.tabs-content .tab-content'),
             element:       this,
             tabs:          this.find('.tabs li'),
             wrapper:       this,

@@ -18,7 +18,7 @@
 
     this.setData = function(name, value) {
         for (var i = 0; i < this.length; i++) {
-            this.setData(name, value);
+            this[i].setData(name, value);
         }
     };
 

@@ -23,9 +23,12 @@
     };
 
     this.find  = this.querySelectorAll;
-    this.pluck = this.querySelector;
+    this.pluck = function(selector) {
+        if (selector instanceof Element) { return selector; }
+        return this.querySelector(selector);
+    };
 
-    this.ready = function(callback, options) {
+    this.ready = function(callback) {
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             callback.call(document);
         } else {
@@ -35,20 +38,23 @@
         }
     };
 
-    this.on = function(event, selector, callback) {
-        if (selector instanceof Element || selector instanceof NodeList) {
-            selector.on(event, callback);
+    this.on = function(event, selector, callback, options) {
+        if (typeof selector == 'function') {
+            document.addEventListener(event, selector, callback);
+
+        } else if (selector instanceof Element || selector instanceof NodeList) {
+            selector.on(event, callback, options);
 
         } else if (selector instanceof Array) {
             selector.apply(function() {
-                document.on(event, this, callback);
+                document.on(event, this, callback, options);
             });
 
         } else {
             if (!(event in this.purj.events)) {
                 document.addEventListener(event, function(ev) {
                     this.purj.handler(event, ev);
-                });
+                }, options || {});
 
                 this.purj.events[event] = true;
             }

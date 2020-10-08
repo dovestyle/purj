@@ -1,8 +1,11 @@
 (function() {
 
     this.find  = this.querySelectorAll;
-    this.pluck = this.querySelector;
     this.on    = this.addEventListener;
+    this.pluck = function(selector) {
+        if (selector instanceof Element) { return selector; }
+        return this.querySelector(selector);
+    };
 
     this.findParent = function(selector) {
         var parent = this.parentElement;

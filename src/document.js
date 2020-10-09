@@ -5,11 +5,15 @@
         listeners: {},
 
         handler: function(event, event_obj) {
-            for (var i = 0; i < event_obj.path.length; i++) {
-                if (typeof event_obj.path[i].matches != 'undefined') {
+            var event_path = event_obj.composedPath();
+            for (var i = 0; i < event_path.length; i++) {
+                if (typeof event_path[i].matches != 'undefined') {
                     this.listeners[event].apply(function(n) {
-                        if (this.callback && event_obj.path[i].matches(this.selector)) {
-                            this.callback.call(event_obj.path[i], event_obj);
+                        if (this.callback && event_path[i].matches(this.selector)) {
+                            this.callback.call(event_path[i], event_obj);
+                            if (this.options.once) {
+                                this.listeners[event] = this.listeners[event].splice(n, 1);
+                            }
                             return false;
                         }
                     });
@@ -65,6 +69,7 @@
 
             this.purj.listeners[event].unshift({
                 callback: callback,
+                options:  options || {},
                 selector: selector,
             });
         }
